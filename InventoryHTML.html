@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Entry</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Enter Inventory Number</h2>
+    <form id="inventoryForm">
+        <label for="inventory">Inventory Number:</label><br>
+        <input type="number" id="inventory" name="inventory" placeholder="Enter inventory number" required><br>
+        
+        <label for="itemName">Item Name:</label><br>
+        <input type="text" id="itemName" name="itemName" placeholder="Enter item name" required><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <h3>Inventory Log</h3>
+    <table id="inventoryTable">
+        <thead>
+            <tr>
+                <th>Inventory Number</th>
+                <th>Item Name</th>
+                <th>Date Entered</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('inventoryForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const inventoryNumber = document.getElementById('inventory').value;
+        const itemName = document.getElementById('itemName').value;
+        const currentDate = new Date().toLocaleString();  // Gets the current date and time
+        
+        // Insert new row into the table
+        const tableBody = document.querySelector('#inventoryTable tbody');
+        const newRow = document.createElement('tr');
+        
+        newRow.innerHTML = `
+            <td>${inventoryNumber}</td>
+            <td>${itemName}</td>
+            <td>${currentDate}</td>
+        `;
+        
+        tableBody.appendChild(newRow);
+        
+        // Reset the form
+        document.getElementById('inventoryForm').reset();
+    });
+</script>
+
+</body>
+</html>
